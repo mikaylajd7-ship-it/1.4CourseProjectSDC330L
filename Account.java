@@ -3,7 +3,7 @@
  * Date: 04/12/2026
  * Purpose: Abstract base class for bank accounts (Inheritance)
  *******************************************************************/
-public abstract class Account {
+public abstract class Account implements BankOperations {
     protected String owner;
     protected double balance;
 
@@ -15,10 +15,13 @@ public abstract class Account {
     public String getOwner() { return owner; }
     public double getBalance() { return balance; }
 
+    // Interface methods implemented
+    @Override
     public void deposit(double amount) {
         balance += amount;
     }
 
+    @Override
     public void withdraw(double amount) {
         balance -= amount;
     }

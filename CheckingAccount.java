@@ -1,5 +1,7 @@
 /*******************************************************************
- * Demonstrates inheritance (child class)
+ * Name: Mikayla Dickerson
+ * Date: 04/12/2026
+ * Purpose: Demonstrates inheritance (Checking Account)
  *******************************************************************/
 public class CheckingAccount extends Account {
 

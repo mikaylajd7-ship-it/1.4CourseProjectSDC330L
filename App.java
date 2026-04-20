@@ -1,13 +1,13 @@
 /*******************************************************************
  * Name: Mikayla Dickerson
- * Date: 04/12/2026
- * Purpose: Main application (Week 1 Project)
+ * Date: 04/19/2026
+ * Purpose: Main application (Week 2 Project)
  *******************************************************************/
 public class App {
     public static void main(String[] args) {
 
-        System.out.println("Mikayla Dickerson - Week 1 Bank Project");
-        System.out.println("Welcome to the Bank Account Management System\n");
+        System.out.println("Mikayla Dickerson - Week 2 Bank Project");
+        System.out.println("Welcome! This program demonstrates inheritance, interfaces, and polymorphism.\n");
 
         Bank bank = new Bank();
 
@@ -18,6 +18,10 @@ public class App {
         // Add to bank (Composition)
         bank.addAccount(acc1);
         bank.addAccount(acc2);
+
+        // Polymorphism using interface
+        bank.processTransaction(acc1, 200);
+        bank.processTransaction(acc2, 300);
 
         // Display accounts
         bank.displayAccounts();
