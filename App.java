@@ -1,41 +1,92 @@
 /*******************************************************************
  * Name: Mikayla Dickerson
- * Date: 04/28/2026
+ * Date: 05/03/2026
  * Purpose: Week 3 Project - Main application file for the
  * Bank Account Management Application.
  * Demonstrates abstraction, constructors, and access specifiers.
  *******************************************************************/
 
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
 
-        // Week 3 project title and welcome message
-        System.out.println("Project Week 3 - Bank Account Management Application");
+        System.out.println("Week 4 Project - Bank Database Application");
         System.out.println("Mikayla Dickerson");
-        System.out.println("This program demonstrates abstraction, constructors, and access specifiers.");
-        System.out.println("Welcome! The program creates accounts, processes transactions, and displays account information.\n");
+        System.out.println("This program stores bank accounts using SQLite.");
+        System.out.println("You can create, view, update, and delete accounts.\n");
 
-        // Creating accounts using constructors
-        CheckingAccount acc1 = new CheckingAccount("John Smith", 500.00);
-        SavingsAccount acc2 = new SavingsAccount("Sarah Johnson", 1000.00);
+        BankDB db = new BankDB();
+        db.createTable();
 
-        // Deposits and withdrawals
-        acc1.deposit(200.00);
-        acc1.withdraw(50.00);
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
 
-        acc2.deposit(300.00);
-        acc2.withdraw(100.00);
+        while (running) {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Add Account");
+            System.out.println("2. View Accounts");
+            System.out.println("3. Deposit");
+            System.out.println("4. Withdraw");
+            System.out.println("5. Delete Account");
+            System.out.println("6. Exit");
 
-        // Abstract method demonstration
-        acc1.monthlyUpdate();
-        acc2.monthlyUpdate();
+            int choice = scanner.nextInt();
 
-        // Display final account information
-        System.out.println("Final Account Information:\n");
+            switch (choice) {
 
-        acc1.displayAccountInfo();
-        System.out.println();
+                case 1:
+                    scanner.nextLine();
+                    System.out.print("Enter owner name: ");
+                    String owner = scanner.nextLine();
 
-        acc2.displayAccountInfo();
+                    System.out.print("Enter balance: ");
+                    double balance = scanner.nextDouble();
+
+                    System.out.print("Type (Checking/Savings): ");
+                    scanner.nextLine();
+                    String type = scanner.nextLine();
+
+                    db.addAccount(owner, balance, type);
+                    break;
+
+                case 2:
+                    db.getAllAccounts();
+                    break;
+
+                case 3:
+                    System.out.print("Enter account ID: ");
+                    int depId = scanner.nextInt();
+
+                    System.out.print("Enter deposit amount: ");
+                    double dep = scanner.nextDouble();
+
+                    db.updateBalance(depId, dep);
+                    break;
+
+                case 4:
+                    System.out.print("Enter account ID: ");
+                    int wId = scanner.nextInt();
+
+                    System.out.print("Enter withdrawal amount: ");
+                    double w = scanner.nextDouble();
+
+                    db.updateBalance(wId, -w);
+                    break;
+
+                case 5:
+                    System.out.print("Enter account ID to delete: ");
+                    int dId = scanner.nextInt();
+                    db.deleteAccount(dId);
+                    break;
+
+                case 6:
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
     }
 }
